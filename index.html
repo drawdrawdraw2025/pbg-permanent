@@ -5,44 +5,39 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>PBG Mmindpower - Permanent Gateway</title>
 <style>
-  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:#f8fafc;color:#0f172a;line-height:1.6;max-width:700px;margin:40px auto;padding:20px}
-  .card{background:white;border:1px solid #e2e8f0;border-radius:16px;padding:28px;box-shadow:0 8px 30px rgba(0,0,0,.06);text-align:center}
-  .cid{font-family:monospace;background:#f1f5f9;padding:6px 10px;border-radius:6px;word-break:break-all;font-size:0.82em;display:inline-block;max-width:100%}
-  .btn{display:inline-block;padding:13px 20px;border-radius:10px;text-decoration:none;font-weight:700;margin:6px;font-size:14px;color:white}
-  .btn-primary{background:#0ea5e9}
-  .btn-puma{background:#10b981}
-  .btn-purple{background:#7c3aed}
-  .btn-gray{background:#475569}
-  .btn-dark{background:#0f172a}
-  .btn-quiz{background:#f59e0b;color:#1f2937}
-  .gateway-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-top:14px}
-  .gateway-grid a{font-size:13px;padding:10px 14px}
-  .muted{color:#64748b;font-size:13px;margin-top:14px}
-  .stable{color:#059669;font-weight:600;font-size:13px;margin-top:10px}
+  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:#0f0f0f;color:#e5e7eb;max-width:520px;margin:0 auto;padding:16px;line-height:1.5}
+  .cid{font-family:monospace;background:#1f2937;padding:10px 12px;border-radius:8px;word-break:break-all;font-size:0.82em;display:block;color:#d1d5db;border:1px solid #374151}
+  a{color:#38bdf8;text-decoration:none}
+  .btn{display:block;width:100%;padding:15px;border-radius:10px;text-decoration:none;font-weight:700;text-align:center;margin:10px 0;font-size:16px;border:none;cursor:pointer}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:10px 0}
+  .grid3 a{font-size:14px;padding:13px 8px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
+  h1{font-size:22px;text-align:center;line-height:1.3}
+  .sub{color:#9ca3af;font-size:13px;text-align:center;margin:6px 0 14px}
+  .label{color:#9ca3af;font-size:13px;text-align:center;margin:14px 0 6px}
 </style>
 </head>
 <body>
-<div class="card">
-  <h1 style="font-size:24px">🚀 PBG Mmindpower - Permanent Gateway</h1>
-  <p style="margin-top:8px">Your <strong>single permanent QR</strong> — scan once, always shows latest site.</p>
-  <p style="margin-top:10px">Current IPFS CID:<br><span class="cid">bafybeihdw6la2uczahihdmg4hxyxliciakvzig56rojdehkywdiuqsnfuq</span></p>
-  <p><a href="ipfs://bafybeihdw6la2uczahihdmg4hxyxliciakvzig56rojdehkywdiuqsnfuq" style="font-family:monospace;font-size:0.82em;word-break:break-all;color:#0ea5e9">ipfs://bafybeihdw6la2uczahihdmg4hxyxliciakvzig56rojdehkywdiuqsnfuq</a></p>
-  
-  <a href="https://bafybeihdw6la2uczahihdmg4hxyxliciakvzig56rojdehkywdiuqsnfuq.ipfs.inbrowser.link/" class="btn btn-primary">⚡ Open Web3 (Instant in India)</a>
-  <a href="ipfs://bafybeihdw6la2uczahihdmg4hxyxliciakvzig56rojdehkywdiuqsnfuq" class="btn btn-puma">Open via ipfs:// (Puma/Brave)</a>
-  
-  <div class="gateway-grid">
-    <a href="https://ipfs.filebase.io/ipfs/QmdfZczneoGsAx6e8ePCBiG4UFXsLswD3mPfeCjqYbP4nP" class="btn" style="background:#0ea5e9">Filebase</a>
-    <a href="https://ipfs.io/ipfs/bafybeihdw6la2uczahihdmg4hxyxliciakvzig56rojdehkywdiuqsnfuq" class="btn btn-purple">ipfs.io</a>
-    <a href="https://dweb.link/ipfs/bafybeihdw6la2uczahihdmg4hxyxliciakvzig56rojdehkywdiuqsnfuq" class="btn btn-gray">dweb.link</a>
-    <a href="https://drawdrawdraw2025.github.io/pbg-mmindpower-eth/" class="btn btn-dark">📦 GitHub Fallback</a>
-    <a href="https://drawdrawdraw2025.github.io/home.html" class="btn btn-quiz">📝 MPSC Quiz</a>
+  <h1>🚀 PBG Mmindpower -<br>Permanent Gateway</h1>
+  <p class="sub">Your <strong style="color:white">single permanent QR</strong> — scan once, always shows latest site.</p>
+
+  <p class="label">Current IPFS CID:</p>
+  <div class="cid">bafybeihdw6la2uczahihdmg4hxyxliciakvzig56rojdehkywdiuqsnfuq</div>
+
+  <p style="text-align:center;margin:12px 0"><a href="ipfs://bafybeihdw6la2uczahihdmg4hxyxliciakvzig56rojdehkywdiuqsnfuq" style="font-family:monospace;font-size:0.82em;word-break:break-all">ipfs://bafybeihdw6la2uczahihdmg4hxyxliciakvzig56rojdehkywdiuqsnfuq</a></p>
+
+  <a href="https://bafybeihdw6la2uczahihdmg4hxyxliciakvzig56rojdehkywdiuqsnfuq.ipfs.inbrowser.link/" class="btn" style="background:#0ea5e9;color:white">⚡ Open Web3 (Instant in India)</a>
+  <a href="ipfs://bafybeihdw6la2uczahihdmg4hxyxliciakvzig56rojdehkywdiuqsnfuq" class="btn" style="background:#10b981;color:white">Open via ipfs:// (Puma/Brave)</a>
+
+  <div class="grid3">
+    <a href="https://ipfs.filebase.io/ipfs/QmdfZczneoGsAx6e8ePCBiG4UFXsLswD3mPfeCjqYbP4nP" class="btn" style="background:#0ea5e9;color:white;padding:13px 6px">Filebase</a>
+    <a href="https://ipfs.io/ipfs/bafybeihdw6la2uczahihdmg4hxyxliciakvzig56rojdehkywdiuqsnfuq" class="btn" style="background:#7c3aed;color:white;padding:13px 6px">ipfs.io</a>
+    <a href="https://dweb.link/ipfs/bafybeihdw6la2uczahihdmg4hxyxliciakvzig56rojdehkywdiuqsnfuq" class="btn" style="background:#4b5563;color:white;padding:13px 6px">dweb.link</a>
   </div>
-  
-  <p class="stable">✅ Stable — no auto-redirect, no countdown. Click any button, stays here until you click.</p>
-  <p class="muted">QR for this page never changes. Latest CID is in <code>latest.json</code> and updated on every GitHub push. Choose any gateway above — all show same Web3 site.</p>
-  <hr style="margin:18px 0;border:none;border-top:1px solid #e2e8f0">
-  <p style="font-size:12px;color:#94a3b8">Bucket: pbg-mmindpower-eth | ENS: pbgmmindpower.eth (coming in few days) | CID: bafybeih... (QmdfZcz... fallback)</p>
-</div>
+
+  <div class="grid2">
+    <a href="https://drawdrawdraw2025.github.io/pbg-mmindpower-eth/" class="btn" style="background:#1f2937;color:white;border:1px solid #374151">📦 GitHub Fallback</a>
+    <a href="https://drawdrawdraw2025.github.io/home.html" class="btn" style="background:#f59e0b;color:#111">📝 MPSC Quiz</a>
+  </div>
 </body>
 </html>

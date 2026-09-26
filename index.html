@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PBG Mmindpower - Permanent Gateway</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 700px; margin: 60px auto; padding: 20px; text-align: center; line-height: 1.6; color: #1a1a1a; }
+    .card { border: 1px solid #e5e7eb; border-radius: 12px; padding: 28px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+    .btn { display: inline-block; background: #0ea5e9; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; margin: 10px; }
+    .cid { font-family: monospace; background: #f1f5f9; padding: 4px 8px; border-radius: 4px; word-break: break-all; font-size: 0.85em; }
+    #countdown { font-size: 0.9em; color: #64748b; margin-top: 10px; }
+  </style>
+  <script>
+    // Fetch latest CID and redirect
+    async function go() {
+      try {
+        const res = await fetch('./latest.json?t=' + Date.now());
+        const data = await res.json();
+        const cid = data.cid;
+        const gateway = `https://ipfs.filebase.io/ipfs/${cid}`;
+        document.getElementById('cid').textContent = cid;
+        document.getElementById('gateway-link').href = gateway;
+        document.getElementById('ipfs-link').href = `ipfs://${cid}`;
+        // Auto-redirect after 2 seconds (unless user clicks)
+        let c = 3;
+        const el = document.getElementById('countdown');
+        const iv = setInterval(() => {
+          c--;
+          el.textContent = `Redirecting to IPFS in ${c}s... (or click button)`;
+          if (c <= 0) {
+            clearInterval(iv);
+            window.location.href = gateway;
+          }
+        }, 1000);
+      } catch (e) {
+        document.getElementById('countdown').textContent = 'Could not fetch latest CID: ' + e.message;
+      }
+    }
+    window.onload = go;
+  </script>
+</head>
+<body>
+  <div class="card">
+    <h1>🚀 PBG Mmindpower - Permanent Gateway</h1>
+    <p>This is your <strong>single permanent QR</strong> gateway.</p>
+    <p>Scan this QR once → Always shows latest site, even after <code>git push</code> updates.</p>
+    <p>Current IPFS CID: <span class="cid" id="cid">QmZSMqVkrPXoWxD3jdfqUQ8bf1xRG8QLmCFKwRLwGPpvC8</span></p>
+    <a id="gateway-link" href="https://ipfs.filebase.io/ipfs/QmZSMqVkrPXoWxD3jdfqUQ8bf1xRG8QLmCFKwRLwGPpvC8" class="btn">Open Latest Site (Filebase Gateway)</a>
+    <a id="ipfs-link" href="ipfs://QmZSMqVkrPXoWxD3jdfqUQ8bf1xRG8QLmCFKwRLwGPpvC8" class="btn" style="background:#10b981;">Open via IPFS (Puma)</a>
+    <p id="countdown">Redirecting to IPFS in 3s... (or click button)</p>
+    <hr style="margin: 20px 0; border: none; border-top: 1px solid #e5e7eb;" />
+    <p style="font-size: 0.85em; color: #64748b;">
+      QR for this page never changes. Latest CID is stored in <code>latest.json</code> and auto-updated on every GitHub push.<br/>
+      Bucket: pbg-mmindpower-eth | Pin: true
+    </p>
+  </div>
+</body>
+</html>

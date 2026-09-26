@@ -22,6 +22,7 @@
   .pill{display:inline-block;background:rgba(255,255,255,.2);padding:4px 10px;border-radius:999px;font-size:11px;font-weight:600;margin:2px}
   .foot{text-align:center;color:#94a3b8;font-size:11px;padding:16px}
   .hl{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:10px;padding:10px;font-size:12px;color:#475569;text-align:center}
+  .coming{background:#fef3c7;border:1px solid #fcd34d;border-radius:10px;padding:10px;font-size:12px;color:#92400e;text-align:center;margin-top:12px}
 </style>
 </head>
 <body>
@@ -29,23 +30,25 @@
   <div class="card">
     <div class="hero">
       <h1>Peoples QR</h1>
-      <p>PBG Mmindpower — Web3 + Quiz (Safe for Everyone)</p>
+      <p>PBG Mmindpower — Web3 + Quiz (Share Now)</p>
       <div style="margin-top:10px"><span class="pill">Public</span><span class="pill">Safe</span><span class="pill">Permanent</span></div>
     </div>
     <div class="body">
       <a class="btn web" href="https://ipfs.filebase.io/ipfs/QmdfZczneoGsAx6e8ePCBiG4UFXsLswD3mPfeCjqYbP4nP/" target="_blank">🌐 PBG Mmindpower Web3 Homepage</a>
       <a class="btn quiz" href="https://drawdrawdraw2025.github.io/home.html" target="_blank">📝 MPSC Quiz Homepage</a>
       <div class="hl" style="margin-top:16px">
-        This QR never changes. Web3 site is on IPFS (<span id="cid">QmdfZczneoGsAx6e8ePCBiG4UFXsLswD3mPfeCjqYbP4nP</span>)<br/>
-        ENS: <b>pbgmmindpower.eth</b> → <a href="https://pbgmmindpower.eth.limo" target="_blank">pbgmmindpower.eth.limo</a>
+        Web3 is on IPFS — permanent: <span id="cid">QmdfZczneoGsAx6e8ePCBiG4UFXsLswD3mPfeCjqYbP4nP</span><br/>
+        Share this QR now — both buttons work today.
+      </div>
+      <div class="coming">
+        🔜 ENS <b>pbgmmindpower.eth</b> → coming in few days → will auto-appear here as <b>pbgmmindpower.eth.limo</b> after you register. No reprint needed.
       </div>
       <div class="muted">Scan → Choose Web3 or Quiz. No payment, no private data. Safe to print everywhere 🙂</div>
     </div>
   </div>
-  <div class="foot">Permanent QR trick: GitHub Pages + IPFS. Update via <code>pbg-permanent</code> repo without reprint.<br/>Owner QR is separate and private.</div>
+  <div class="foot">Permanent QR trick: GitHub Pages + IPFS. Update via <code>pbg-permanent</code> repo without reprint.<br/>After ENS register, this page will auto-show ENS link.</div>
 </div>
 <script>
-// auto-update CID from latest.json
 fetch('./latest.json?'+Date.now()).then(r=>r.json()).then(j=>{
   if(j.cid) document.getElementById('cid').textContent=j.cid;
 }).catch(()=>{});

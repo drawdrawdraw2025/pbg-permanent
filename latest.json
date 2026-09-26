@@ -1,10 +1,10 @@
 {
   "cid": "QmdfZczneoGsAx6e8ePCBiG4UFXsLswD3mPfeCjqYbP4nP",
-  "updated": "2026-09-26T19:30:00Z",
+  "updated": "2026-09-26T19:55:00Z",
   "bucket": "pbg-mmindpower-eth",
   "gateway": "https://ipfs.filebase.io/ipfs/QmdfZczneoGsAx6e8ePCBiG4UFXsLswD3mPfeCjqYbP4nP",
   "source_repo": "drawdrawdraw2025/pbg-mmindpower-eth",
-  "ens": "pbgmmindpower.eth",
+  "ens": "pbgmmindpower.eth - coming in few days",
   "quiz": "https://drawdrawdraw2025.github.io/home.html",
-  "type": "Peoples QR - Web3 + Quiz only"
+  "type": "Peoples QR - Web3 + Quiz only (ENS coming soon)"
 }

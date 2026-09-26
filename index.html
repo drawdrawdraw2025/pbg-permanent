@@ -20,7 +20,8 @@
         const res = await fetch('./latest.json?t=' + Date.now(), {cache:'no-store'});
         const data = await res.json();
         const cid = data.cid;
-        const filebase = `https://ipfs.filebase.io/ipfs/${cid}`;
+        const filebase = `https://bafybeihdw6la2uczahihdmg4hxyxliciakvzig56rojdehkywdiuqsnfuq.ipfs.inbrowser.link/`;
+        const filebaseBackup = `https://ipfs.filebase.io/ipfs/${cid}`;
         const ipfsio = `https://ipfs.io/ipfs/${cid}`;
         const dweb = `https://dweb.link/ipfs/${cid}`;
         const ipfsNative = `ipfs://${cid}`;
@@ -36,10 +37,10 @@
         const el = document.getElementById('countdown');
         const iv = setInterval(() => {
           c--;
-          el.textContent = `Redirecting to Filebase in ${c}s... (or click any gateway if Filebase is slow)`;
+          el.textContent = `Opening your site in ${c}s... (or click any gateway if Filebase is slow)`;
           if (c <= 0) {
             clearInterval(iv);
-            window.location.href = filebase;
+            window.location.href = filebase; // primary is inbrowser.link (fast in India)
           }
         }, 1000);
       } catch (e) {
@@ -54,17 +55,18 @@
     <h1>🚀 PBG Mmindpower - Permanent Gateway</h1>
     <p>This is your <strong>single permanent QR</strong> gateway.</p>
     <p>Scan this QR once → Always shows latest site, even after <code>git push</code> updates.</p>
-    <p>Current IPFS CID: <span class="cid" id="cid">QmdfZczneoGsAx6e8ePCBiG4UFXsLswD3mPfeCjqYbP4nP</span></p>
-    <p><a id="ipfsNativeText" href="ipfs://QmdfZczneoGsAx6e8ePCBiG4UFXsLswD3mPfeCjqYbP4nP" style="font-family:monospace;font-size:0.8em;word-break:break-all;color:#0ea5e9">ipfs://QmdfZczneoGsAx6e8ePCBiG4UFXsLswD3mPfeCjqYbP4nP</a></p>
-    <a id="gateway-link" href="https://ipfs.filebase.io/ipfs/QmdfZczneoGsAx6e8ePCBiG4UFXsLswD3mPfeCjqYbP4nP" class="btn">Open via Filebase (fast)</a>
-    <a id="ipfs-link" href="ipfs://QmdfZczneoGsAx6e8ePCBiG4UFXsLswD3mPfeCjqYbP4nP" class="btn" style="background:#10b981;">Open via ipfs:// (Puma/Brave)</a>
+    <p>Current IPFS CID: <span class="cid" id="cid">bafybeihdw6la2uczahihdmg4hxyxliciakvzig56rojdehkywdiuqsnfuq</span></p>
+    <p><a id="ipfsNativeText" href="ipfs://bafybeihdw6la2uczahihdmg4hxyxliciakvzig56rojdehkywdiuqsnfuq" style="font-family:monospace;font-size:0.8em;word-break:break-all;color:#0ea5e9">ipfs://bafybeihdw6la2uczahihdmg4hxyxliciakvzig56rojdehkywdiuqsnfuq</a></p>
+    <a id="gateway-link" href="https://bafybeihdw6la2uczahihdmg4hxyxliciakvzig56rojdehkywdiuqsnfuq.ipfs.inbrowser.link/" class="btn" style="background:#0ea5e9">⚡ Open Web3 (Instant in India)</a>
+    <a id="ipfs-link" href="ipfs://bafybeihdw6la2uczahihdmg4hxyxliciakvzig56rojdehkywdiuqsnfuq" class="btn" style="background:#10b981;">Open via ipfs:// (Puma/Brave)</a>
     <div class="gateway-grid">
+      <a href="https://ipfs.filebase.io/ipfs/QmdfZczneoGsAx6e8ePCBiG4UFXsLswD3mPfeCjqYbP4nP" class="btn" style="background:#0ea5e9">Filebase</a>
       <a id="ipfsio-link" href="https://ipfs.io/ipfs/QmdfZczneoGsAx6e8ePCBiG4UFXsLswD3mPfeCjqYbP4nP" class="btn" style="background:#7c3aed">ipfs.io</a>
       <a id="dweb-link" href="https://dweb.link/ipfs/QmdfZczneoGsAx6e8ePCBiG4UFXsLswD3mPfeCjqYbP4nP" class="btn" style="background:#475569">dweb.link</a>
       <a href="https://drawdrawdraw2025.github.io/pbg-mmindpower-eth/" class="btn" style="background:#0f172a">📦 GitHub Fallback (always works)</a>
       <a href="https://drawdrawdraw2025.github.io/home.html" class="btn" style="background:#f59e0b">📝 MPSC Quiz</a>
     </div>
-    <p id="countdown">Redirecting to Filebase in 3s... (or click any gateway if Filebase is slow)</p>
+    <p id="countdown">Opening your site in 3s... (or click any gateway if Filebase is slow)</p>
     <hr style="margin: 20px 0; border: none; border-top: 1px solid #e5e7eb;" />
     <p style="font-size: 0.82em; color: #64748b;">
       QR for this page never changes. Latest CID is stored in <code>latest.json</code> and auto-updated on every GitHub push.<br/>

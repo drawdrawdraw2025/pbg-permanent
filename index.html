@@ -1,57 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Peoples QR — PBG Mmindpower Web3 + Quiz</title>
-<style>
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:#f8fafc;color:#0f172a;line-height:1.6}
-  .wrap{max-width:640px;margin:32px auto;padding:16px}
-  .card{background:white;border:1px solid #e2e8f0;border-radius:16px;box-shadow:0 8px 30px rgba(0,0,0,.06);overflow:hidden}
-  .hero{background:linear-gradient(135deg,#0ea5e9 0%,#7c3aed 100%);color:white;padding:28px;text-align:center}
-  .hero h1{font-size:26px}
-  .hero p{opacity:.9;margin-top:6px;font-size:14px}
-  .body{padding:24px}
-  .btn{display:block;width:100%;text-align:center;padding:16px 18px;border-radius:12px;font-weight:700;text-decoration:none;margin:10px 0;font-size:16px}
-  .btn.web{background:#0ea5e9;color:white}
-  .btn.web:hover{background:#0284c7}
-  .btn.quiz{background:#16a34a;color:white}
-  .btn.quiz:hover{background:#15803d}
-  .muted{color:#64748b;font-size:12px;text-align:center;margin-top:12px}
-  .pill{display:inline-block;background:rgba(255,255,255,.2);padding:4px 10px;border-radius:999px;font-size:11px;font-weight:600;margin:2px}
-  .foot{text-align:center;color:#94a3b8;font-size:11px;padding:16px}
-  .hl{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:10px;padding:10px;font-size:12px;color:#475569;text-align:center}
-  .coming{background:#fef3c7;border:1px solid #fcd34d;border-radius:10px;padding:10px;font-size:12px;color:#92400e;text-align:center;margin-top:12px}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PBG Mmindpower - Permanent Gateway</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 700px; margin: 40px auto; padding: 20px; text-align: center; line-height: 1.6; color: #1a1a1a; background:#f8fafc }
+    .card { border: 1px solid #e5e7eb; border-radius: 12px; padding: 28px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); background:white }
+    .btn { display: inline-block; background: #0ea5e9; color: white; padding: 12px 22px; border-radius: 8px; text-decoration: none; margin: 6px; font-weight:600; font-size:14px }
+    .btn:hover{opacity:.9}
+    .cid { font-family: monospace; background: #f1f5f9; padding: 6px 10px; border-radius: 6px; word-break: break-all; font-size: 0.82em; display:inline-block; max-width:100% }
+    #countdown { font-size: 0.9em; color: #64748b; margin-top: 10px; }
+    .gateway-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-top:10px}
+    .gateway-grid a{font-size:13px;padding:10px 14px}
+  </style>
+  <script>
+    async function go() {
+      try {
+        const res = await fetch('./latest.json?t=' + Date.now(), {cache:'no-store'});
+        const data = await res.json();
+        const cid = data.cid;
+        const filebase = `https://ipfs.filebase.io/ipfs/${cid}`;
+        const ipfsio = `https://ipfs.io/ipfs/${cid}`;
+        const dweb = `https://dweb.link/ipfs/${cid}`;
+        const ipfsNative = `ipfs://${cid}`;
+        document.getElementById('cid').textContent = cid;
+        document.getElementById('gateway-link').href = filebase;
+        document.getElementById('ipfs-link').href = ipfsNative;
+        document.getElementById('ipfsio-link').href = ipfsio;
+        document.getElementById('dweb-link').href = dweb;
+        document.getElementById('ipfsNativeText').textContent = ipfsNative;
+        document.getElementById('ipfsNativeText').href = ipfsNative;
+        // Auto-redirect to Filebase after 3s (fastest for most), user can click any gateway if slow
+        let c = 3;
+        const el = document.getElementById('countdown');
+        const iv = setInterval(() => {
+          c--;
+          el.textContent = `Redirecting to Filebase in ${c}s... (or click any gateway if Filebase is slow)`;
+          if (c <= 0) {
+            clearInterval(iv);
+            window.location.href = filebase;
+          }
+        }, 1000);
+      } catch (e) {
+        document.getElementById('countdown').textContent = 'Could not fetch latest CID: ' + e.message;
+      }
+    }
+    window.onload = go;
+  </script>
 </head>
 <body>
-<div class="wrap">
   <div class="card">
-    <div class="hero">
-      <h1>Peoples QR</h1>
-      <p>PBG Mmindpower — Web3 + Quiz (Share Now)</p>
-      <div style="margin-top:10px"><span class="pill">Public</span><span class="pill">Safe</span><span class="pill">Permanent</span></div>
+    <h1>🚀 PBG Mmindpower - Permanent Gateway</h1>
+    <p>This is your <strong>single permanent QR</strong> gateway.</p>
+    <p>Scan this QR once → Always shows latest site, even after <code>git push</code> updates.</p>
+    <p>Current IPFS CID: <span class="cid" id="cid">QmdfZczneoGsAx6e8ePCBiG4UFXsLswD3mPfeCjqYbP4nP</span></p>
+    <p><a id="ipfsNativeText" href="ipfs://QmdfZczneoGsAx6e8ePCBiG4UFXsLswD3mPfeCjqYbP4nP" style="font-family:monospace;font-size:0.8em;word-break:break-all;color:#0ea5e9">ipfs://QmdfZczneoGsAx6e8ePCBiG4UFXsLswD3mPfeCjqYbP4nP</a></p>
+    <a id="gateway-link" href="https://ipfs.filebase.io/ipfs/QmdfZczneoGsAx6e8ePCBiG4UFXsLswD3mPfeCjqYbP4nP" class="btn">Open via Filebase (fast)</a>
+    <a id="ipfs-link" href="ipfs://QmdfZczneoGsAx6e8ePCBiG4UFXsLswD3mPfeCjqYbP4nP" class="btn" style="background:#10b981;">Open via ipfs:// (Puma/Brave)</a>
+    <div class="gateway-grid">
+      <a id="ipfsio-link" href="https://ipfs.io/ipfs/QmdfZczneoGsAx6e8ePCBiG4UFXsLswD3mPfeCjqYbP4nP" class="btn" style="background:#7c3aed">ipfs.io</a>
+      <a id="dweb-link" href="https://dweb.link/ipfs/QmdfZczneoGsAx6e8ePCBiG4UFXsLswD3mPfeCjqYbP4nP" class="btn" style="background:#475569">dweb.link</a>
+      <a href="https://drawdrawdraw2025.github.io/home.html" class="btn" style="background:#f59e0b">📝 MPSC Quiz</a>
     </div>
-    <div class="body">
-      <a class="btn web" href="https://ipfs.filebase.io/ipfs/QmdfZczneoGsAx6e8ePCBiG4UFXsLswD3mPfeCjqYbP4nP/" target="_blank">🌐 PBG Mmindpower Web3 Homepage</a>
-      <a class="btn quiz" href="https://drawdrawdraw2025.github.io/home.html" target="_blank">📝 MPSC Quiz Homepage</a>
-      <div class="hl" style="margin-top:16px">
-        Web3 is on IPFS — permanent: <span id="cid">QmdfZczneoGsAx6e8ePCBiG4UFXsLswD3mPfeCjqYbP4nP</span><br/>
-        Share this QR now — both buttons work today.
-      </div>
-      <div class="coming">
-        🔜 ENS <b>pbgmmindpower.eth</b> → coming in few days → will auto-appear here as <b>pbgmmindpower.eth.limo</b> after you register. No reprint needed.
-      </div>
-      <div class="muted">Scan → Choose Web3 or Quiz. No payment, no private data. Safe to print everywhere 🙂</div>
-    </div>
+    <p id="countdown">Redirecting to Filebase in 3s... (or click any gateway if Filebase is slow)</p>
+    <hr style="margin: 20px 0; border: none; border-top: 1px solid #e5e7eb;" />
+    <p style="font-size: 0.82em; color: #64748b;">
+      QR for this page never changes. Latest CID is stored in <code>latest.json</code> and auto-updated on every GitHub push.<br/>
+      If Filebase takes too long, click <b>ipfs.io</b> / <b>dweb.link</b> or <b>ipfs://</b> (best in Puma/Brave).<br/>
+      Bucket: pbg-mmindpower-eth | ENS: pbgmmindpower.eth (coming soon)
+    </p>
   </div>
-  <div class="foot">Permanent QR trick: GitHub Pages + IPFS. Update via <code>pbg-permanent</code> repo without reprint.<br/>After ENS register, this page will auto-show ENS link.</div>
-</div>
-<script>
-fetch('./latest.json?'+Date.now()).then(r=>r.json()).then(j=>{
-  if(j.cid) document.getElementById('cid').textContent=j.cid;
-}).catch(()=>{});
-</script>
 </body>
 </html>

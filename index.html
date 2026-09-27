@@ -147,6 +147,14 @@ function copyMM(){
 </div>
 <script>
 let _gw_url="", _gw_opt=null;
+const _browserOptions=[
+  {name:"Chrome", icon:"🌐", pkg:"com.android.chrome", color:"#4285f4"},
+  {name:"Brave", icon:"🦁", pkg:"com.brave.browser", color:"#fb542b"},
+  {name:"Puma Browser", icon:"🐆", pkg:"com.pumabrowser.pumabrowser", color:"#0ea5e9"},
+  {name:"MetaMask", icon:"🦊", pkg:"io.metamask", color:"#f6851b"},
+  {name:"Firefox", icon:"🦊", pkg:"org.mozilla.firefox", color:"#ff7139"},
+  {name:"Opera", icon:"⭕", pkg:"com.opera.browser", color:"#ff1b2d"}
+];
 const _gwOptions=[
   {name:"Open Web3 (inbrowser.link)", icon:"⚡", url:"https://bafybeihdw6la2uczahihdmg4hxyxliciakvzig56rojdehkywdiuqsnfuq.ipfs.inbrowser.link/", color:"#0ea5e9"},
   {name:"Filebase", icon:"📦", url:"https://ipfs.filebase.io/ipfs/QmdfZczneoGsAx6e8ePCBiG4UFXsLswD3mPfeCjqYbP4nP", color:"#0ea5e9"},
@@ -161,6 +169,11 @@ function showGwChooser(url, title){
   document.getElementById('gwChoosersub').textContent=url;
   const list=document.getElementById('gwChooserList');
   list.innerHTML="";
+  // Gateways section title
+  const titleGw=document.createElement('div');
+  titleGw.style.cssText='padding:8px 16px 4px;font-size:12px;color:#9aa0a6;letter-spacing:0.5px';
+  titleGw.textContent='GATEWAYS';
+  list.appendChild(titleGw);
   _gwOptions.forEach((o,i)=>{
     const u = o.copy? _gw_url : o.url;
     const div=document.createElement('div');
@@ -175,6 +188,27 @@ function showGwChooser(url, title){
     };
     div.ondblclick=()=>{ doGwOpen(o, u); };
     div.innerHTML=`<div style="width:40px;height:40px;border-radius:50%;background:${o.color};display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">${o.icon}</div><div style="flex:1"><div style="font-size:15px">${o.name}</div><div style="font-size:12px;color:#9aa0a6;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:240px">${u}</div></div>`;
+    list.appendChild(div);
+  });
+  // Browsers section
+  const titleBr=document.createElement('div');
+  titleBr.style.cssText='padding:12px 16px 4px;margin-top:8px;border-top:1px solid #3c4043;font-size:12px;color:#9aa0a6;letter-spacing:0.5px';
+  titleBr.textContent='OPEN WITH BROWSER';
+  list.appendChild(titleBr);
+  _browserOptions.forEach((b)=>{
+    const intent='intent://'+_gw_url.replace(/^https:\/\//,'')+'#Intent;scheme=https;action=android.intent.action.VIEW;package='+b.pkg+';S.browser_fallback_url='+encodeURIComponent(_gw_url)+';end';
+    const div=document.createElement('div');
+    div.style.cssText='display:flex;align-items:center;gap:16px;padding:12px 16px;cursor:pointer';
+    div.onmouseenter=()=>div.style.background='#2d2e30';
+    div.onmouseleave=()=>div.style.background='transparent';
+    div.onclick=()=>{
+      _gw_opt=b; _gw_opt._intent=intent; _gw_opt._url=_gw_url;
+      document.querySelectorAll('#gwChooserList div').forEach(d=>d.style.background='transparent');
+      div.style.background='#35363a';
+      document.getElementById('gwJustOnce').style.opacity='1';
+    };
+    div.ondblclick=()=>{ hideGwChooser(); window.location.href=intent; setTimeout(()=>window.open(_gw_url,'_blank'),800); };
+    div.innerHTML=`<div style="width:40px;height:40px;border-radius:50%;background:${b.color};display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">${b.icon}</div><div style="flex:1"><div style="font-size:15px">${b.name}</div><div style="font-size:12px;color:#9aa0a6">Open with ${b.name} • DApp / Puma / Chrome</div></div>`;
     list.appendChild(div);
   });
   // single tap handling for Just once
@@ -198,7 +232,17 @@ function doGwOpen(opt, url){
     navigator.clipboard.writeText(url);
     return;
   }
-  // For gateways, try to use system chooser if possible, otherwise open
+  if(opt.pkg){
+    const intent='intent://'+url.replace(/^https:\/\//,'')+'#Intent;scheme=https;action=android.intent.action.VIEW;package='+opt.pkg+';S.browser_fallback_url='+encodeURIComponent(url)+';end';
+    window.location.href=intent;
+    setTimeout(()=>window.open(url,'_blank'),800);
+    return;
+  }
+  if(opt._intent){
+    window.location.href=opt._intent;
+    setTimeout(()=>window.open(opt._url||url,'_blank'),800);
+    return;
+  }
   window.open(url, '_blank');
 }
 </script>

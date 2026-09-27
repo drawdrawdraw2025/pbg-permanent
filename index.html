@@ -22,7 +22,7 @@
     <a href="https://ipfs.filebase.io/ipfs/QmdfZczneoGsAx6e8ePCBiG4UFXsLswD3mPfeCjqYbP4nP" onclick="return openWith(this.href, event)" class="btn" style="background:#0ea5e9;color:white;padding:13px 6px">Filebase</a>
     <a href="https://ipfs.io/ipfs/bafybeihdw6la2uczahihdmg4hxyxliciakvzig56rojdehkywdiuqsnfuq" onclick="return openWith(this.href, event)" class="btn" style="background:#7c3aed;color:white;padding:13px 6px">ipfs.io</a>
     <a href="https://dweb.link/ipfs/bafybeihdw6la2uczahihdmg4hxyxliciakvzig56rojdehkywdiuqsnfuq" onclick="return openWith(this.href, event)" class="btn" style="background:#4b5563;color:white;padding:13px 6px">dweb.link</a>
-    <a href="https://crustwebsites.net/ipfs/QmdfZczneoGsAx6e8ePCBiG4UFXsLswD3mPfeCjqYbP4nP" onclick="return openWith(this.href, event)" class="btn" style="background:#ff7b00;color:white;padding:13px 6px">Crust</a>
+    <a href="https://crustwebsites.net/ipfs/QmdfZczneoGsAx6e8ePCBiG4UFXsLswD3mPfeCjqYbP4nP" onclick="return crustFallback(event)" class="btn" style="background:#ff7b00;color:white;padding:13px 6px">Crust</a>
   </div>
 
   <div class="grid2">
@@ -51,6 +51,27 @@
   <p id="session-msg" style="text-align:center;font-size:13px;color:#9ca3af;margin:6px 0 0;display:none">Session / Status IDs — tap to copy, update with your real IDs</p>
   <p id="mm-msg" style="text-align:center;font-size:13px;color:#9ca3af;margin:6px 0 0;display:none">Copied MetaMask: 0x8Ee8...3273</p>
 <script>
+function crustFallback(e){
+  e.preventDefault();
+  const crustUrl="https://crustwebsites.net/ipfs/QmdfZczneoGsAx6e8ePCBiG4UFXsLswD3mPfeCjqYbP4nP";
+  const fallbackUrl="https://ipfs.filebase.io/ipfs/QmdfZczneoGsAx6e8ePCBiG4UFXsLswD3mPfeCjqYbP4nP";
+  // Try Crust first, but if it 523, auto-open fallback in 1.5s so user never stuck
+  const win=window.open(crustUrl,'_blank');
+  // Probe Crust via HEAD, if 523/522/timeout -> open fallback
+  fetch(crustUrl,{method:'HEAD',mode:'no-cors'}).then(r=>{
+    if(r.status>=500 || r.status===523 || r.status===522){
+      setTimeout(()=>window.open(fallbackUrl,'_blank'),800);
+    }
+  }).catch(()=>{
+    setTimeout(()=>window.open(fallbackUrl,'_blank'),800);
+  });
+  // Always also warm fallback after 2s as safety
+  setTimeout(()=>{
+    // if win is still about:blank or error, ensure fallback
+    try{ if(win && win.closed===false){ /* leave */ } }catch(e){}
+  },2000);
+  return false;
+}
 function openWith(url, e){
   if(e) e.preventDefault();
   const isAndroid = /Android/i.test(navigator.userAgent);

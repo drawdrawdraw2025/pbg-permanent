@@ -1,6 +1,6 @@
 {
   "cid": "bafybeihdw6la2uczahihdmg4hxyxliciakvzig56rojdehkywdiuqsnfuq",
-  "updated": "2026-09-27T01:15:00Z",
+  "updated": "2026-09-27T01:50:00Z",
   "bucket": "pbg-mmindpower-eth",
   "gateway": "https://bafybeihdw6la2uczahihdmg4hxyxliciakvzig56rojdehkywdiuqsnfuq.ipfs.inbrowser.link/",
   "source_repo": "drawdrawdraw2025/pbg-mmindpower-eth",
@@ -19,5 +19,6 @@
   "xmtp": "https://converse.xyz/dm/0x8Ee8369b765BbB52d8D23514492D00a02B193273",
   "dmail": "https://mail.dmail.ai/compose?to=0x8Ee8369b765BbB52d8D23514492D00a02B193273 (pbgmmindpower.eth)",
   "session": "placeholder - user to provide Session ID via getsession.org",
-  "status": "placeholder - user to provide Status chat key via status.im"
+  "status": "placeholder - user to provide Status chat key via status.im",
+  "crust": "https://crustwebsites.net/ipfs/QmdfZczneoGsAx6e8ePCBiG4UFXsLswD3mPfeCjqYbP4nP (free promo via files.crustapps.net)"
 }

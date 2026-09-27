@@ -38,6 +38,7 @@
     <a href="lightning:olderreport808@walletofsatoshi.com" onclick="navigator.clipboard.writeText('olderreport808@walletofsatoshi.com');return true" class="btn" style="background:#facc15;color:#111;border:1px solid #eab308">⚡ Lightning</a>
     <a href="ethereum:0x8Ee8369b765BbB52d8D23514492D00a02B193273" onclick="copyMM();return true" class="btn" style="background:#f6851b;color:white;border:1px solid #e67e22">🦊 MetaMask</a>
   </div>
+  <a href="#" onclick="connectWallet();return false" class="btn" style="background:#10b981;color:white;border:1px solid #059669">🔗 Connect Wallet</a>
   <p id="mm-msg" style="text-align:center;font-size:13px;color:#9ca3af;margin:6px 0 0;display:none">Copied MetaMask: 0x8Ee8...3273</p>
 <script>
 function openWith(url, e){
@@ -64,6 +65,31 @@ function copyGPay(){
     m.style.display='block';
     setTimeout(()=>m.style.display='none',2500);
   }).catch(()=>{ prompt('Copy G-Pay UPI:',upi); });
+}
+function connectWallet(){
+  if(typeof window.ethereum === 'undefined'){
+    alert('MetaMask not found — install MetaMask or open in MetaMask browser\n\nYour donate address still works: 0x8Ee8369b765BbB52d8D23514492D00a02B193273 (🦊 MetaMask button)');
+    window.open('https://metamask.io/download/','_blank');
+    return;
+  }
+  window.ethereum.request({method:'eth_requestAccounts'}).then(accounts=>{
+    const addr=accounts[0];
+    const short=addr.slice(0,6)+'...'+addr.slice(-4);
+    const m=document.getElementById('mm-msg');
+    m.style.display='block';
+    m.textContent='Connected: '+addr;
+    m.style.color='#10b981';
+    // also update button text to show connected
+    const btn=document.querySelector('a[onclick*="connectWallet"]');
+    if(btn) btn.textContent='🔗 '+short;
+    setTimeout(()=>{ m.style.display='none'; m.style.color='#9ca3af'; }, 3500);
+    navigator.clipboard.writeText(addr).catch(()=>{});
+  }).catch(err=>{
+    const m=document.getElementById('mm-msg');
+    m.style.display='block';
+    m.textContent='Connect rejected: '+(err.message||err.code);
+    setTimeout(()=>m.style.display='none', 3000);
+  });
 }
 function copyMM(){
   const addr='0x8Ee8369b765BbB52d8D23514492D00a02B193273';

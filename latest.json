@@ -1,12 +1,13 @@
 {
   "cid": "bafybeihdw6la2uczahihdmg4hxyxliciakvzig56rojdehkywdiuqsnfuq",
-  "updated": "2026-09-26T21:18:00Z",
+  "updated": "2026-09-27T00:05:00Z",
   "bucket": "pbg-mmindpower-eth",
   "gateway": "https://bafybeihdw6la2uczahihdmg4hxyxliciakvzig56rojdehkywdiuqsnfuq.ipfs.inbrowser.link/",
   "source_repo": "drawdrawdraw2025/pbg-mmindpower-eth",
   "ens": "pbgmmindpower.eth - coming in few days",
   "quiz": "https://drawdrawdraw2025.github.io/home.html",
-  "type": "Peoples QR - Web3 + Quiz + Lightning",
+  "type": "Peoples QR - Web3 + Quiz + Lightning + MetaMask (title-only)",
   "primary_gateway_note": "Instant in India - inbrowser.link (your working link)",
-  "lightning": "olderreport808@walletofsatoshi.com"
+  "lightning": "olderreport808@walletofsatoshi.com",
+  "metamask": "0x8Ee8369b765BbB52d8D23514492D00a02B193273"
 }

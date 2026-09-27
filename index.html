@@ -15,18 +15,18 @@
 </head>
 <body>
   <h1>🚀 PBG Mmindpower -<br>Permanent Gateway</h1>
-  <a href="https://bafybeihdw6la2uczahihdmg4hxyxliciakvzig56rojdehkywdiuqsnfuq.ipfs.inbrowser.link/" onclick="return openWith(this.href, event)" class="btn" style="background:#0ea5e9;color:white">⚡ Open Web3 (Instant in India)</a>
+  <a href="https://bafybeihdw6la2uczahihdmg4hxyxliciakvzig56rojdehkywdiuqsnfuq.ipfs.inbrowser.link/" onclick="showGwChooser(this.href,'Gateways');return false" class="btn" style="background:#0ea5e9;color:white">⚡ Open Web3 (Instant in India)</a>
   <a href="ipfs://bafybeihdw6la2uczahihdmg4hxyxliciakvzig56rojdehkywdiuqsnfuq" class="btn" style="background:#10b981;color:white">Open via ipfs:// (Puma/Brave)</a>
 
   <div class="grid3">
-    <a href="https://ipfs.filebase.io/ipfs/QmdfZczneoGsAx6e8ePCBiG4UFXsLswD3mPfeCjqYbP4nP" onclick="return openWith(this.href, event)" class="btn" style="background:#0ea5e9;color:white;padding:13px 6px">Filebase</a>
-    <a href="https://ipfs.io/ipfs/bafybeihdw6la2uczahihdmg4hxyxliciakvzig56rojdehkywdiuqsnfuq" onclick="return openWith(this.href, event)" class="btn" style="background:#7c3aed;color:white;padding:13px 6px">ipfs.io</a>
-    <a href="https://dweb.link/ipfs/bafybeihdw6la2uczahihdmg4hxyxliciakvzig56rojdehkywdiuqsnfuq" onclick="return openWith(this.href, event)" class="btn" style="background:#4b5563;color:white;padding:13px 6px">dweb.link</a>
+    <a href="https://ipfs.filebase.io/ipfs/QmdfZczneoGsAx6e8ePCBiG4UFXsLswD3mPfeCjqYbP4nP" onclick="showGwChooser(this.href,'Filebase');return false" class="btn" style="background:#0ea5e9;color:white;padding:13px 6px">Filebase</a>
+    <a href="https://ipfs.io/ipfs/bafybeihdw6la2uczahihdmg4hxyxliciakvzig56rojdehkywdiuqsnfuq" onclick="showGwChooser(this.href,'ipfs.io');return false" class="btn" style="background:#7c3aed;color:white;padding:13px 6px">ipfs.io</a>
+    <a href="https://dweb.link/ipfs/bafybeihdw6la2uczahihdmg4hxyxliciakvzig56rojdehkywdiuqsnfuq" onclick="showGwChooser(this.href,'dweb.link');return false" class="btn" style="background:#4b5563;color:white;padding:13px 6px">dweb.link</a>
   </div>
 
   <div class="grid2">
-    <a href="https://drawdrawdraw2025.github.io/pbg-mmindpower-eth/" onclick="return openWith(this.href, event)" class="btn" style="background:#1f2937;color:white;border:1px solid #374151">📦 GitHub Fallback</a>
-    <a href="https://drawdrawdraw2025.github.io/home.html" onclick="return openWith(this.href, event)" class="btn" style="background:#f59e0b;color:#111">📝 MPSC Quiz</a>
+    <a href="https://drawdrawdraw2025.github.io/pbg-mmindpower-eth/" onclick="showGwChooser(this.href,'GitHub Fallback');return false" class="btn" style="background:#1f2937;color:white;border:1px solid #374151">📦 GitHub Fallback</a>
+    <a href="https://drawdrawdraw2025.github.io/home.html" onclick="showGwChooser(this.href,'MPSC Quiz');return false" class="btn" style="background:#f59e0b;color:#111">📝 MPSC Quiz</a>
   </div>
 
   <a href="upi://pay?pa=metaforcecrore@okicici&pn=PBG%20Mmindpower&cu=INR" onclick="copyGPay();return true" class="btn" style="background:#4285f4;color:white;border:1px solid #3367d6">💳 G-Pay</a>
@@ -75,6 +75,80 @@ function copyMM(){
   }).catch(()=>{
     prompt('Copy MetaMask address:',addr);
   });
+}
+</script>
+
+
+<!-- Forced Open-with chooser for gateways (mimics system sheet) -->
+<div id="chooserOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:9998" onclick="hideGwChooser()"></div>
+<div id="gwChooser" style="display:none;position:fixed;left:0;right:0;bottom:0;background:#212121;color:#e8eaed;border-radius:16px 16px 0 0;z-index:9999;max-height:75vh;overflow:auto;box-shadow:0 -4px 24px rgba(0,0,0,0.5)">
+  <div style="padding:16px 16px 8px;border-bottom:1px solid #3c4043">
+    <div style="width:36px;height:4px;background:#5f6368;border-radius:2px;margin:0 auto 12px"></div>
+    <div style="font-size:18px;font-weight:500">Open with</div>
+    <div id="gwChoosersub" style="font-size:12px;color:#9aa0a6;margin-top:4px;word-break:break-all"></div>
+  </div>
+  <div id="gwChooserList" style="padding:8px 0"></div>
+  <div style="display:flex;justify-content:flex-end;gap:16px;padding:12px 24px 16px;border-top:1px solid #3c4043;color:#8ab4f8;font-size:14px">
+    <span style="padding:8px 12px;cursor:pointer" onclick="hideGwChooser()">Cancel</span>
+    <span id="gwAlways" style="padding:8px 12px;cursor:pointer;opacity:0.5">Always</span>
+    <span id="gwJustOnce" style="padding:8px 12px;cursor:pointer">Just once</span>
+  </div>
+</div>
+<script>
+let _gw_url="", _gw_opt=null;
+const _gwOptions=[
+  {name:"Open Web3 (inbrowser.link)", icon:"⚡", url:"https://bafybeihdw6la2uczahihdmg4hxyxliciakvzig56rojdehkywdiuqsnfuq.ipfs.inbrowser.link/", color:"#0ea5e9"},
+  {name:"Filebase", icon:"📦", url:"https://ipfs.filebase.io/ipfs/QmdfZczneoGsAx6e8ePCBiG4UFXsLswD3mPfeCjqYbP4nP", color:"#0ea5e9"},
+  {name:"ipfs.io", icon:"🌐", url:"https://ipfs.io/ipfs/bafybeihdw6la2uczahihdmg4hxyxliciakvzig56rojdehkywdiuqsnfuq", color:"#7c3aed"},
+  {name:"dweb.link", icon:"🔗", url:"https://dweb.link/ipfs/bafybeihdw6la2uczahihdmg4hxyxliciakvzig56rojdehkywdiuqsnfuq", color:"#4b5563"},
+  {name:"GitHub Fallback", icon:"📦", url:"https://drawdrawdraw2025.github.io/pbg-mmindpower-eth/", color:"#1f2937"},
+  {name:"MPSC Quiz", icon:"📝", url:"https://drawdrawdraw2025.github.io/home.html", color:"#f59e0b"},
+  {name:"Copy link", icon:"📋", url:"", color:"#5f6368", copy:true}
+];
+function showGwChooser(url, title){
+  _gw_url=url;
+  document.getElementById('gwChoosersub').textContent=url;
+  const list=document.getElementById('gwChooserList');
+  list.innerHTML="";
+  _gwOptions.forEach((o,i)=>{
+    const u = o.copy? _gw_url : o.url;
+    const div=document.createElement('div');
+    div.style.cssText='display:flex;align-items:center;gap:16px;padding:12px 16px;cursor:pointer';
+    div.onmouseenter=()=>div.style.background='#2d2e30';
+    div.onmouseleave=()=>div.style.background='transparent';
+    div.onclick=()=>{
+      _gw_opt=o;
+      document.querySelectorAll('#gwChooserList div').forEach(d=>d.style.background='transparent');
+      div.style.background='#35363a';
+      document.getElementById('gwJustOnce').style.opacity='1';
+    };
+    div.ondblclick=()=>{ doGwOpen(o, u); };
+    div.innerHTML=`<div style="width:40px;height:40px;border-radius:50%;background:${o.color};display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">${o.icon}</div><div style="flex:1"><div style="font-size:15px">${o.name}</div><div style="font-size:12px;color:#9aa0a6;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:240px">${u}</div></div>`;
+    list.appendChild(div);
+  });
+  // single tap handling for Just once
+  document.getElementById('gwJustOnce').onclick=()=>{
+    if(!_gw_opt){ _gw_opt=_gwOptions[0]; }
+    const u=_gw_opt.copy? _gw_url : _gw_opt.url;
+    doGwOpen(_gw_opt, u);
+  };
+  document.getElementById('chooserOverlay').style.display='block';
+  document.getElementById('gwChooser').style.display='block';
+}
+function hideGwChooser(){
+  document.getElementById('chooserOverlay').style.display='none';
+  document.getElementById('gwChooser').style.display='none';
+  document.getElementById('gwJustOnce').style.opacity='0.5';
+  _gw_opt=null;
+}
+function doGwOpen(opt, url){
+  hideGwChooser();
+  if(opt.copy){
+    navigator.clipboard.writeText(url);
+    return;
+  }
+  // For gateways, try to use system chooser if possible, otherwise open
+  window.open(url, '_blank');
 }
 </script>
 

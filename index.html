@@ -31,9 +31,9 @@
 
   <a href="upi://pay?pa=metaforcecrore@okicici&pn=PBG%20Mmindpower&cu=INR" onclick="copyGPay();return true" class="btn" style="background:#4285f4;color:white;border:1px solid #3367d6">💳 G-Pay</a>
   <p id="gpay-msg" style="text-align:center;font-size:13px;color:#9ca3af;margin:6px 0 0;display:none">G-Pay UPI: metaforcecrore@okicici</p>
-  <a href="https://youtube.com/@mmindpower" onclick="return openWith(this.href, event)" class="btn" style="background:#ff0000;color:white;border:1px solid #cc0000">▶️ YouTube @mmindpower</a>
-  <a href="https://wa.me/qr/SPQPZEZDUV5NO1" onclick="return openWith(this.href, event)" class="btn" style="background:#25D366;color:white;border:1px solid #1da851">💬 WhatsApp</a>
-  <a href="https://t.me/mmindpower_1" onclick="return openWith(this.href, event)" class="btn" style="background:#0088cc;color:white;border:1px solid #0077b5">✈️ Telegram</a>
+  <a href="https://youtube.com/@mmindpower" class="btn" style="background:#ff0000;color:white;border:1px solid #cc0000">▶️ YouTube @mmindpower</a>
+  <a href="https://wa.me/qr/SPQPZEZDUV5NO1" class="btn" style="background:#25D366;color:white;border:1px solid #1da851">💬 WhatsApp</a>
+  <a href="https://t.me/mmindpower_1" class="btn" style="background:#0088cc;color:white;border:1px solid #0077b5">✈️ Telegram</a>
   <div class="grid2">
     <a href="lightning:olderreport808@walletofsatoshi.com" onclick="navigator.clipboard.writeText('olderreport808@walletofsatoshi.com');return true" class="btn" style="background:#facc15;color:#111;border:1px solid #eab308">⚡ Lightning</a>
     <a href="ethereum:0x8Ee8369b765BbB52d8D23514492D00a02B193273" onclick="copyMM();return true" class="btn" style="background:#f6851b;color:white;border:1px solid #e67e22">🦊 MetaMask</a>
@@ -49,7 +49,7 @@ function openWith(url, e){
       const intent = 'intent://' + url.replace(/^https:\/\//,'') + '#Intent;scheme=https;action=android.intent.action.VIEW;end';
       window.location.href = intent;
       // Fallback to https after 700ms if intent not handled (desktop will stay)
-      setTimeout(()=>{ window.location.href = url; }, 900);
+      setTimeout(()=>{ window.location.href = url; }, 300);
       return false;
     }catch(err){}
   }

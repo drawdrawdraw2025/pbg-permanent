@@ -15,18 +15,18 @@
 </head>
 <body>
   <h1>🚀 PBG Mmindpower -<br>Permanent Gateway</h1>
-  <a href="https://bafybeihdw6la2uczahihdmg4hxyxliciakvzig56rojdehkywdiuqsnfuq.ipfs.inbrowser.link/" class="btn" style="background:#0ea5e9;color:white">⚡ Open Web3 (Instant in India)</a>
+  <a href="https://bafybeihdw6la2uczahihdmg4hxyxliciakvzig56rojdehkywdiuqsnfuq.ipfs.inbrowser.link/" onclick="return openWith(this.href, event)" class="btn" style="background:#0ea5e9;color:white">⚡ Open Web3 (Instant in India)</a>
   <a href="ipfs://bafybeihdw6la2uczahihdmg4hxyxliciakvzig56rojdehkywdiuqsnfuq" class="btn" style="background:#10b981;color:white">Open via ipfs:// (Puma/Brave)</a>
 
   <div class="grid3">
-    <a href="https://ipfs.filebase.io/ipfs/QmdfZczneoGsAx6e8ePCBiG4UFXsLswD3mPfeCjqYbP4nP" class="btn" style="background:#0ea5e9;color:white;padding:13px 6px">Filebase</a>
-    <a href="https://ipfs.io/ipfs/bafybeihdw6la2uczahihdmg4hxyxliciakvzig56rojdehkywdiuqsnfuq" class="btn" style="background:#7c3aed;color:white;padding:13px 6px">ipfs.io</a>
-    <a href="https://dweb.link/ipfs/bafybeihdw6la2uczahihdmg4hxyxliciakvzig56rojdehkywdiuqsnfuq" class="btn" style="background:#4b5563;color:white;padding:13px 6px">dweb.link</a>
+    <a href="https://ipfs.filebase.io/ipfs/QmdfZczneoGsAx6e8ePCBiG4UFXsLswD3mPfeCjqYbP4nP" onclick="return openWith(this.href, event)" class="btn" style="background:#0ea5e9;color:white;padding:13px 6px">Filebase</a>
+    <a href="https://ipfs.io/ipfs/bafybeihdw6la2uczahihdmg4hxyxliciakvzig56rojdehkywdiuqsnfuq" onclick="return openWith(this.href, event)" class="btn" style="background:#7c3aed;color:white;padding:13px 6px">ipfs.io</a>
+    <a href="https://dweb.link/ipfs/bafybeihdw6la2uczahihdmg4hxyxliciakvzig56rojdehkywdiuqsnfuq" onclick="return openWith(this.href, event)" class="btn" style="background:#4b5563;color:white;padding:13px 6px">dweb.link</a>
   </div>
 
   <div class="grid2">
-    <a href="https://drawdrawdraw2025.github.io/pbg-mmindpower-eth/" class="btn" style="background:#1f2937;color:white;border:1px solid #374151">📦 GitHub Fallback</a>
-    <a href="https://drawdrawdraw2025.github.io/home.html" class="btn" style="background:#f59e0b;color:#111">📝 MPSC Quiz</a>
+    <a href="https://drawdrawdraw2025.github.io/pbg-mmindpower-eth/" onclick="return openWith(this.href, event)" class="btn" style="background:#1f2937;color:white;border:1px solid #374151">📦 GitHub Fallback</a>
+    <a href="https://drawdrawdraw2025.github.io/home.html" onclick="return openWith(this.href, event)" class="btn" style="background:#f59e0b;color:#111">📝 MPSC Quiz</a>
   </div>
 
   <a href="upi://pay?pa=metaforcecrore@okicici&pn=PBG%20Mmindpower&cu=INR" onclick="copyGPay();return true" class="btn" style="background:#4285f4;color:white;border:1px solid #3367d6">💳 G-Pay</a>
@@ -37,6 +37,23 @@
   </div>
   <p id="mm-msg" style="text-align:center;font-size:13px;color:#9ca3af;margin:6px 0 0;display:none">Copied MetaMask: 0x8Ee8...3273</p>
 <script>
+function openWith(url, e){
+  if(e) e.preventDefault();
+  // Try Android intent for Open-with chooser (browsers, etc)
+  const isAndroid = /Android/i.test(navigator.userAgent);
+  if(isAndroid){
+    try{
+      const intent = 'intent://' + url.replace(/^https:\/\//,'') + '#Intent;scheme=https;action=android.intent.action.VIEW;end';
+      window.location.href = intent;
+      // Fallback to https after 700ms if intent not handled (desktop will stay)
+      setTimeout(()=>{ window.location.href = url; }, 900);
+      return false;
+    }catch(err){}
+  }
+  window.open(url, '_blank');
+  return false;
+}
+
 function copyGPay(){
   const upi='metaforcecrore@okicici';
   navigator.clipboard.writeText(upi).then(()=>{

@@ -39,6 +39,15 @@
     <a href="ethereum:0x8Ee8369b765BbB52d8D23514492D00a02B193273" onclick="copyMM();return true" class="btn" style="background:#f6851b;color:white;border:1px solid #e67e22">🦊 MetaMask</a>
   </div>
   <a href="#" onclick="connectWallet();return false" class="btn" style="background:#10b981;color:white;border:1px solid #059669">🔗 Connect Wallet</a>
+  <div class="grid2">
+    <a href="https://converse.xyz/dm/0x8Ee8369b765BbB52d8D23514492D00a02B193273" class="btn" style="background:#8a63d2;color:white;border:1px solid #7c3aed">✉️ XMTP</a>
+    <a href="https://mail.dmail.ai/compose?to=0x8Ee8369b765BbB52d8D23514492D00a02B193273" class="btn" style="background:#00b4ab;color:white;border:1px solid #009e96">📧 DMail</a>
+  </div>
+  <div class="grid2">
+    <a href="https://getsession.org/download" onclick="copySession();return false" class="btn" style="background:#000000;color:white;border:1px solid #333">💬 Session</a>
+    <a href="https://status.im/get-status" onclick="copyStatus();return false" class="btn" style="background:#4360df;color:white;border:1px solid #3148c9">🟢 Status</a>
+  </div>
+  <p id="session-msg" style="text-align:center;font-size:13px;color:#9ca3af;margin:6px 0 0;display:none">Session / Status IDs — tap to copy, update with your real IDs</p>
   <p id="mm-msg" style="text-align:center;font-size:13px;color:#9ca3af;margin:6px 0 0;display:none">Copied MetaMask: 0x8Ee8...3273</p>
 <script>
 function openWith(url, e){
@@ -65,6 +74,22 @@ function copyGPay(){
     m.style.display='block';
     setTimeout(()=>m.style.display='none',2500);
   }).catch(()=>{ prompt('Copy G-Pay UPI:',upi); });
+}
+function copySession(){
+  const id='Get your Session ID at getsession.org → Settings → Share ID';
+  navigator.clipboard.writeText(id).catch(()=>{});
+  const m=document.getElementById('session-msg');
+  m.textContent=id;
+  m.style.display='block';
+  setTimeout(()=>m.style.display='none', 3500);
+}
+function copyStatus(){
+  const id='Get your Status chat key at status.im → Profile → Share';
+  navigator.clipboard.writeText(id).catch(()=>{});
+  const m=document.getElementById('session-msg');
+  m.textContent=id;
+  m.style.display='block';
+  setTimeout(()=>m.style.display='none', 3500);
 }
 function connectWallet(){
   if(typeof window.ethereum === 'undefined'){

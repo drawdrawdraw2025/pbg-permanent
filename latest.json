@@ -1,24 +1,8 @@
 {
-  "cid": "bafybeihdw6la2uczahihdmg4hxyxliciakvzig56rojdehkywdiuqsnfuq",
-  "updated": "2026-09-27T01:50:00Z",
+  "cid": "QmU3y1X1CpDi38iwMbrdbBy9gJRYVWnKJG26Ld9yEck6kY",
+  "updated": "2026-09-27T06:29:53Z",
   "bucket": "pbg-mmindpower-eth",
-  "gateway": "https://bafybeihdw6la2uczahihdmg4hxyxliciakvzig56rojdehkywdiuqsnfuq.ipfs.inbrowser.link/",
+  "gateway": "https://ipfs.filebase.io/ipfs/QmU3y1X1CpDi38iwMbrdbBy9gJRYVWnKJG26Ld9yEck6kY",
   "source_repo": "drawdrawdraw2025/pbg-mmindpower-eth",
-  "ens": "pbgmmindpower.eth - coming in few days",
-  "quiz": "https://drawdrawdraw2025.github.io/home.html",
-  "type": "Peoples QR - Web3 + Quiz + Lightning + MetaMask + G-Pay + YouTube + WhatsApp + Telegram + Connect + XMTP + DMail + Session + Status (Open-with all)",
-  "primary_gateway_note": "Instant in India - inbrowser.link (your working link)",
-  "lightning": "olderreport808@walletofsatoshi.com",
-  "metamask": "0x8Ee8369b765BbB52d8D23514492D00a02B193273",
-  "gpay": "metaforcecrore@okicici",
-  "youtube": "https://youtube.com/@mmindpower",
-  "whatsapp": "https://wa.me/qr/SPQPZEZDUV5NO1",
-  "telegram": "https://t.me/mmindpower_1",
-  "connectWallet": "window.ethereum eth_requestAccounts",
-  "metamaskDonate": "0x8Ee8369b765BbB52d8D23514492D00a02B193273",
-  "xmtp": "https://converse.xyz/dm/0x8Ee8369b765BbB52d8D23514492D00a02B193273",
-  "dmail": "https://mail.dmail.ai/compose?to=0x8Ee8369b765BbB52d8D23514492D00a02B193273 (pbgmmindpower.eth)",
-  "session": "placeholder - user to provide Session ID via getsession.org",
-  "status": "placeholder - user to provide Status chat key via status.im",
-  "crust": "https://crustwebsites.net/ipfs/QmdfZczneoGsAx6e8ePCBiG4UFXsLswD3mPfeCjqYbP4nP (free promo via files.crustapps.net)"
+  "commit": "a472a2a04eaf508e7610e4baf74def1048f9c5e6"
 }

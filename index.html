@@ -19,7 +19,7 @@
   <a href="ipfs://bafybeihdw6la2uczahihdmg4hxyxliciakvzig56rojdehkywdiuqsnfuq" class="btn" style="background:#10b981;color:white">Open via ipfs:// (Puma/Brave)</a>
 
   <div class="grid3" style="grid-template-columns:1fr 1fr 1fr 1fr">
-    <a href="https://ipfs.filebase.io/ipfs/QmdfZczneoGsAx6e8ePCBiG4UFXsLswD3mPfeCjqYbP4nP" onclick="return openWith(this.href, event)" class="btn" style="background:#0ea5e9;color:white;padding:13px 6px">Filebase</a>
+    <a href="https://ipfs.filebase.io/ipfs/QmdfZczneoGsAx6e8ePCBiG4UFXsLswD3mPfeCjqYbP4nP/" onclick="return openWith(this.href, event)" class="btn" style="background:#0ea5e9;color:white;padding:13px 6px">Filebase</a>
     <a href="https://ipfs.io/ipfs/bafybeihdw6la2uczahihdmg4hxyxliciakvzig56rojdehkywdiuqsnfuq" onclick="return openWith(this.href, event)" class="btn" style="background:#7c3aed;color:white;padding:13px 6px">ipfs.io</a>
     <a href="https://dweb.link/ipfs/bafybeihdw6la2uczahihdmg4hxyxliciakvzig56rojdehkywdiuqsnfuq" onclick="return openWith(this.href, event)" class="btn" style="background:#4b5563;color:white;padding:13px 6px">dweb.link</a>
     <a href="https://crustwebsites.net/ipfs/QmdfZczneoGsAx6e8ePCBiG4UFXsLswD3mPfeCjqYbP4nP" onclick="return crustFallback(event)" class="btn" style="background:#ff7b00;color:white;padding:13px 6px">Crust</a>
@@ -28,6 +28,7 @@
   <div class="grid2">
     <a href="https://drawdrawdraw2025.github.io/pbg-mmindpower-eth/" onclick="return openWith(this.href, event)" class="btn" style="background:#1f2937;color:white;border:1px solid #374151">📦 GitHub Fallback</a>
     <a href="https://drawdrawdraw2025.github.io/home.html" onclick="return openWith(this.href, event)" class="btn" style="background:#f59e0b;color:#111">📝 MPSC Quiz</a>
+  <a href="./calendar-2027-marathi.html" onclick="return openWith(this.href, event)" class="btn" style="background:#8B0000;color:#F0C75E;border:1px solid #D4A017">📅 Marathi 2027 Calendar</a>
   </div>
 
   <a href="upi://pay?pa=metaforcecrore@okicici&pn=PBG%20Mmindpower&cu=INR" onclick="copyGPay();return true" class="btn" style="background:#4285f4;color:white;border:1px solid #3367d6">💳 G-Pay</a>
@@ -54,22 +55,18 @@
 function crustFallback(e){
   e.preventDefault();
   const crustUrl="https://crustwebsites.net/ipfs/QmdfZczneoGsAx6e8ePCBiG4UFXsLswD3mPfeCjqYbP4nP";
-  const fallbackUrl="https://ipfs.filebase.io/ipfs/QmdfZczneoGsAx6e8ePCBiG4UFXsLswD3mPfeCjqYbP4nP";
-  // Try Crust first, but if it 523, auto-open fallback in 1.5s so user never stuck
+  const fallbackUrl="https://ipfs.filebase.io/ipfs/QmdfZczneoGsAx6e8ePCBiG4UFXsLswD3mPfeCjqYbP4nP/";
+  // Glitch fix 2026-09-28: Crust is 523 via Cloudflare — detect fast and fallback to Filebase so user never stuck
   const win=window.open(crustUrl,'_blank');
-  // Probe Crust via HEAD, if 523/522/timeout -> open fallback
-  fetch(crustUrl,{method:'HEAD',mode:'no-cors'}).then(r=>{
-    if(r.status>=500 || r.status===523 || r.status===522){
-      setTimeout(()=>window.open(fallbackUrl,'_blank'),800);
-    }
-  }).catch(()=>{
-    setTimeout(()=>window.open(fallbackUrl,'_blank'),800);
-  });
-  // Always also warm fallback after 2s as safety
-  setTimeout(()=>{
-    // if win is still about:blank or error, ensure fallback
-    try{ if(win && win.closed===false){ /* leave */ } }catch(e){}
-  },2000);
+  let fallbackOpened=false;
+  const openFallback=()=>{ if(!fallbackOpened){ fallbackOpened=true; window.open(fallbackUrl,'_blank'); } };
+  const ctrl=new AbortController();
+  const timeout=setTimeout(()=>{ ctrl.abort(); openFallback(); },1200);
+  fetch(crustUrl,{method:'HEAD',mode:'cors',signal:ctrl.signal,cache:'no-store'}).then(r=>{
+    clearTimeout(timeout);
+    if(r.status>=500 || r.status===523 || r.status===522){ openFallback(); }
+    else { setTimeout(()=>fetch(fallbackUrl,{mode:'no-cors'}).catch(()=>{}),3000); }
+  }).catch(()=>{ clearTimeout(timeout); openFallback(); });
   return false;
 }
 function openWith(url, e){
